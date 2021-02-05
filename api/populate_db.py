@@ -19,7 +19,7 @@ def read():
 		# Bank.objects.all().delete()
 		for row in reader:
 			lines += 1
-			print(row[0],row[1], row[7])
+			# print(row[0],row[1], row[7])
 		end = time.time()
 		print("total time  : ",end-begin)
 		print("total lines  : ", lines)
@@ -37,7 +37,7 @@ def populate_bank():
 		Bank.objects.all().delete()
 		for row in reader:
 			# lines += 1
-			print(row[1], row[7])
+			# print(row[1], row[7])
 			if row[1].isdigit():
 				new_bank, created = Bank.objects.get_or_create(id=int(row[1]), name=row[7])
 				new_bank.save()
@@ -112,6 +112,7 @@ def create_dict(row):
 n_things = 100
 
 def run():
+	start = time.time()
 	fhand = open(os.path.join(sys.path[0], "api/bank_branches.csv"), encoding ="utf8")
 	reader= csv.reader(fhand)
 	# Bank.objects.all().delete()
@@ -125,10 +126,13 @@ def run():
 
 	thing_objects = []
 	for thing in things:
-		print(thing['ifsc'],thing['branch'])
+		# print(thing['ifsc'],thing['branch'])
 		if  Branch.objects.filter(ifsc = thing['ifsc']).exists():
 			pass
 		else:
 			t = Branch(**thing)
 			thing_objects.append(t)
+	
 	Branch.objects.bulk_create(thing_objects)
+	end = time.time()
+	print("total time : ",end-start)
