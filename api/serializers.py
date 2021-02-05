@@ -1,0 +1,18 @@
+from rest_framework import serializers
+
+from .models import *
+
+
+class BankSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Bank
+		fields = ['id','name']
+
+
+class BranchSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Branch
+		fields = "__all__"
+
+
+		
