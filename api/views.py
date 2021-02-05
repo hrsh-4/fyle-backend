@@ -12,12 +12,12 @@ from .models import *
 
 
 
-TOTAL_BANKS = Bank.objects.all().count()
-TOTAL_BRANCHES = Branch.objects.all().count()
+# TOTAL_BANKS = Bank.objects.all().count()
+# TOTAL_BRANCHES = Branch.objects.all().count()
 
 
 def index(request):
-	print(TOTAL_BANKS, TOTAL_BRANCHES)
+	# print(TOTAL_BANKS, TOTAL_BRANCHES)
 	return render(request,"index.html")
 
 class BranchSearchView(mixins.ListModelMixin,generics.GenericAPIView):
@@ -33,10 +33,7 @@ class BranchSearchView(mixins.ListModelMixin,generics.GenericAPIView):
 		limit = int(self.request.query_params.get("limit")) if limit else 100
 
 		limit += offset
-		limit = TOTAL_BRANCHES if limit > TOTAL_BRANCHES else limit
-
-		offset = TOTAL_BRANCHES if offset > TOTAL_BRANCHES else offset
-
+	
 		if user_query:
 			queryset=Branch.objects.filter(Q(ifsc__icontains=user_query)|Q(bank_id__icontains=user_query)|Q(branch__icontains=user_query)|Q(address__icontains=user_query)|Q(city__icontains=user_query)|Q(district__icontains=user_query)|Q(state__icontains=user_query)).order_by('ifsc')
 			queryset = queryset[offset:limit]
@@ -63,9 +60,9 @@ class BranchAutoCompleteSearchView(mixins.ListModelMixin,generics.GenericAPIView
 		limit = int(self.request.query_params.get("limit")) if limit else 100
 		
 		limit += offset
-		limit = TOTAL_BRANCHES if limit > TOTAL_BRANCHES else limit
+		# limit = TOTAL_BRANCHES if limit > TOTAL_BRANCHES else limit
 
-		offset = TOTAL_BRANCHES if offset > TOTAL_BRANCHES else offset
+		# offset = TOTAL_BRANCHES if offset > TOTAL_BRANCHES else offset
 
 		if user_query:
 			queryset=Branch.objects.filter(Q(branch__icontains=user_query)).order_by('ifsc')
