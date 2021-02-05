@@ -81,10 +81,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'drbu2968vhr29',
+        'HOST' : 'ec2-34-198-31-223.compute-1.amazonaws.com',
+        'PORT' : 5432,
+        'USER' : 'btrnlkkajydzsn',
+        'PASSWORD' : 'c5f817624c902664c04589f30bd38b05b8565e061914dae1b0191751f7f1bb3e'
     }
 }
+
+# postgres://btrnlkkajydzsn:c5f817624c902664c04589f30bd38b05b8565e061914dae1b0191751f7f1bb3e@ec2-34-198-31-223.compute-1.amazonaws.com:5432/drbu2968vhr29
 
 
 # Password validation
