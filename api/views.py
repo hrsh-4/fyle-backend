@@ -30,7 +30,7 @@ class BranchSearchView(mixins.ListModelMixin,generics.GenericAPIView):
 		offset = self.request.query_params.get("offset")
 		
 		offset = int(self.request.query_params.get("offset")) if offset else 0
-		limit = int(self.request.query_params.get("limit")) if limit else 100
+		limit = int(self.request.query_params.get("limit")) if limit else 500
 
 		limit += offset
 	
@@ -57,7 +57,7 @@ class BranchAutoCompleteSearchView(mixins.ListModelMixin,generics.GenericAPIView
 		offset = self.request.query_params.get("offset")
 		
 		offset = int(self.request.query_params.get("offset")) if offset else 0
-		limit = int(self.request.query_params.get("limit")) if limit else 100
+		limit = int(self.request.query_params.get("limit")) if limit else 500
 		
 		limit += offset
 		# limit = TOTAL_BRANCHES if limit > TOTAL_BRANCHES else limit
